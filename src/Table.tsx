@@ -36,49 +36,54 @@ function TableComponent() {
   }, [checkedCount, tableData]);
 
   return (
-    <Table striped bordered hover style={{ width: "80vw", margin: "auto" }}>
-      <thead>
-        <tr>
-          {fixedHeaderEntries.map((fixedHeaderEntry) => (
-            <td key={fixedHeaderEntry}>{fixedHeaderEntry}</td>
-          ))}
-          <td>{dynamicHeaderEntries[index]}</td>
-          <td>{dynamicHeaderEntries[index + 1]}</td>
-          <td>{dynamicHeaderEntries[index + 2]}</td>
-          <td
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-            }}
-          >
-            <button onClick={handlePrevPage}>prev</button>
-            <button onClick={handleNextPage}>next</button>
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        {tableData.map((info) => (
-          <tr key={info.firstName}>
-            <td>
-              <input
-                type="checkbox"
-                value={info.position}
-                checked={info.isChecked}
-                disabled={checkedCount === 2 && !info.isChecked}
-                onChange={() => handleCheckboxClick(info.position)}
-              />{" "}
-              {info.position}
+    <div>
+      <div className="w-75 d-flex justify-content-end">
+        <button disabled={checkedCount !== 2}>Compare</button>
+      </div>
+      <Table striped bordered hover style={{ width: "80vw", margin: "auto" }}>
+        <thead>
+          <tr>
+            {fixedHeaderEntries.map((fixedHeaderEntry) => (
+              <td key={fixedHeaderEntry}>{fixedHeaderEntry}</td>
+            ))}
+            <td>{dynamicHeaderEntries[index]}</td>
+            <td>{dynamicHeaderEntries[index + 1]}</td>
+            <td>{dynamicHeaderEntries[index + 2]}</td>
+            <td
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+              }}
+            >
+              <button onClick={handlePrevPage}>prev</button>
+              <button onClick={handleNextPage}>next</button>
             </td>
-            <td>{info.firstName}</td>
-            <td>{info.lastName}</td>
-            <td>{info.userName}</td>
-            <td>{info.innerPagesInfo[index]}</td>
-            <td>{info.innerPagesInfo[index + 1]}</td>
-            <td>{info.innerPagesInfo[index + 2]}</td>
           </tr>
-        ))}
-      </tbody>
-    </Table>
+        </thead>
+        <tbody>
+          {tableData.map((info) => (
+            <tr key={info.firstName}>
+              <td>
+                <input
+                  type="checkbox"
+                  value={info.position}
+                  checked={info.isChecked}
+                  disabled={checkedCount === 2 && !info.isChecked}
+                  onChange={() => handleCheckboxClick(info.position)}
+                />{" "}
+                {info.position}
+              </td>
+              <td>{info.firstName}</td>
+              <td>{info.lastName}</td>
+              <td>{info.userName}</td>
+              <td>{info.innerPagesInfo[index]}</td>
+              <td>{info.innerPagesInfo[index + 1]}</td>
+              <td>{info.innerPagesInfo[index + 2]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 }
 
