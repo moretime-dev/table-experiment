@@ -19,6 +19,7 @@ export const dynamicHeaderEntries = [
 export const tableContentInformation = [
   {
     position: 1,
+    isChecked: false,
     firstName: "Martin",
     lastName: "Gündüz",
     userName: "moretime",
@@ -36,6 +37,7 @@ export const tableContentInformation = [
   },
   {
     position: 2,
+    isChecked: false,
     firstName: "Jon",
     lastName: "Truenerd",
     userName: "MATN",
@@ -53,6 +55,7 @@ export const tableContentInformation = [
   },
   {
     position: 3,
+    isChecked: false,
     firstName: "Madame",
     lastName: "Dubois",
     userName: "MaDu",
@@ -70,6 +73,7 @@ export const tableContentInformation = [
   },
   {
     position: 4,
+    isChecked: false,
     firstName: "Rudy",
     lastName: "Basement",
     userName: "Timmy",

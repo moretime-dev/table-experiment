@@ -8,6 +8,7 @@ import { useState } from "react";
 
 function TableComponent() {
   const [index, setIndex] = useState(0);
+  const [tableData, setTableData] = useState(tableContentInformation);
 
   const handleNextPage = () => {
     if (index === dynamicHeaderEntries.length - 3) return setIndex(0);
@@ -16,6 +17,17 @@ function TableComponent() {
   const handlePrevPage = () => {
     if (index === 0) return;
     setIndex((prev) => prev - 1);
+  };
+
+  const handleCheckboxClick = (position: number) => {
+    console.log(position);
+    setTableData((prevData) =>
+      prevData.map((data) =>
+        data.position === position
+          ? { ...data, isChecked: !data.isChecked }
+          : data
+      )
+    );
   };
 
   return (
@@ -40,10 +52,16 @@ function TableComponent() {
         </tr>
       </thead>
       <tbody>
-        {tableContentInformation.map((info) => (
+        {tableData.map((info) => (
           <tr key={info.firstName}>
             <td>
-              <input type="checkbox" /> {info.position}
+              <input
+                type="checkbox"
+                value={info.position}
+                checked={info.isChecked}
+                onChange={() => handleCheckboxClick(info.position)}
+              />{" "}
+              {info.position}
             </td>
             <td>{info.firstName}</td>
             <td>{info.lastName}</td>
