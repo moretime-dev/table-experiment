@@ -4,11 +4,12 @@ import {
   dynamicHeaderEntries,
   tableContentInformation,
 } from "./tableContent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function TableComponent() {
   const [index, setIndex] = useState(0);
   const [tableData, setTableData] = useState(tableContentInformation);
+  const [checkedCount, setCheckedCount] = useState(0);
 
   const handleNextPage = () => {
     if (index === dynamicHeaderEntries.length - 3) return setIndex(0);
@@ -20,7 +21,6 @@ function TableComponent() {
   };
 
   const handleCheckboxClick = (position: number) => {
-    console.log(position);
     setTableData((prevData) =>
       prevData.map((data) =>
         data.position === position
@@ -29,6 +29,11 @@ function TableComponent() {
       )
     );
   };
+
+  useEffect(() => {
+    const updatedCount = tableData.filter((item) => item.isChecked).length;
+    setCheckedCount(updatedCount);
+  }, [checkedCount, tableData]);
 
   return (
     <Table striped bordered hover style={{ width: "80vw", margin: "auto" }}>
@@ -59,6 +64,7 @@ function TableComponent() {
                 type="checkbox"
                 value={info.position}
                 checked={info.isChecked}
+                disabled={checkedCount === 2 && !info.isChecked}
                 onChange={() => handleCheckboxClick(info.position)}
               />{" "}
               {info.position}
